@@ -1,8 +1,7 @@
 const http = require('http');
 const express = require('express');
-const app = express();
 const db = require('./db/conn');
-const Module = require('./model/user');
+const app = require('./app');
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
@@ -45,26 +44,6 @@ server.on('listening', () => {
     const address = server.address();
     const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
     console.log('Listening on ' + bind);
-});
-
-
-app.use((req, res, next) => {
-    console.log('req received', req.originalUrl)
-    next()
-})
-
-app.get('/user', function (req, res, next) {
-    Module.find({})
-        .then((Modules) => {
-            console.log('modules : ', Modules)
-            res.status(200).json(Modules)
-        })
-        .catch(error => {
-            console.log('error getModules : ', error)
-            res.status(200).json({error: "fucked"})
-        })
-
-    // res.send('MARSEILLE BB');
 });
 
 server.listen(port);

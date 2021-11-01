@@ -5,7 +5,7 @@ const Module = new Schema(
     {
         name: { type: String, required: true },
         event: { type: String, required: true },
-        date: { type: Date, required: true }
+        date: { type: String, required: true },
     }
 )
-module.exports = mongoose.model('henstEvents', Module)
+module.exports = mongoose.model('henstevents', Module)
